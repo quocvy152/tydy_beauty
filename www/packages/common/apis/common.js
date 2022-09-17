@@ -43,59 +43,59 @@ module.exports = class Auth extends ChildRouter {
              * Date: 14/06/2021
              * Dev: VyPQ
              */
-            // [CF_ROUTINGS_COMMON.LOGIN]: {
-            //     config: {
-			// 		auth: [ roles.role.all.bin ],
-			// 		type: 'view',
-            //         inc : 'pages/login-admin.ejs',
-            //         view: 'pages/login-admin.ejs'
-			// 	},
-			// 	methods: {
-			// 		get: [ (req, res) => {
-			// 			 /**
-            //              * CHECK AND REDIRECT WHEN LOGIN
-            //              */
-			// 			const infoLogin = USER_SESSION.getUser(req.session);
-			// 			if (infoLogin && infoLogin.user && infoLogin.token)
-			// 				return res.redirect('/product/list-product');
+            [CF_ROUTINGS_COMMON.LOGIN]: {
+                config: {
+					auth: [ roles.role.all.bin ],
+					type: 'view',
+                    inc : 'pages/login-admin.ejs',
+                    view: 'pages/login-admin.ejs'
+				},
+				methods: {
+					get: [ (req, res) => {
+						 /**
+                         * CHECK AND REDIRECT WHEN LOGIN
+                         */
+						const infoLogin = USER_SESSION.getUser(req.session);
+						if (infoLogin && infoLogin.user && infoLogin.token)
+							return res.redirect('/product/list-product');
 
-			// 			ChildRouter.renderToView(req, res);
-			// 		}],
-            //         post: [ async (req, res) => {
-            //             const { email, password } = req.body;
+						ChildRouter.renderToView(req, res);
+					}],
+                    post: [ async (req, res) => {
+                        const { email, password } = req.body;
 
-            //             const infoSignIn = await USER_MODEL.signIn({ email, password });
+                        const infoSignIn = await USER_MODEL.signIn({ email, password });
 
-			// 			if (!infoSignIn.error) {
-			// 				const { user, token } = infoSignIn.data;
+						if (!infoSignIn.error) {
+							const { user, token } = infoSignIn.data;
 
-            //                 USER_SESSION.saveUser(req.session, {
-            //                     user, 
-            //                     token,
-            //                 });
-            //             }
-            //             res.json(infoSignIn);
-            //         }],
-			// 	},
-            // },
+                            USER_SESSION.saveUser(req.session, {
+                                user, 
+                                token,
+                            });
+                        }
+                        res.json(infoSignIn);
+                    }],
+				},
+            },
 
             /**
              * Function: Clear session and redirect to login page (API)
-             * Date: 14/06/2021
+             * Date: 18/09/2022
              * Dev: VyPQ
              */
-            // [CF_ROUTINGS_COMMON.LOGOUT]: {
-            //     config: {
-            //         auth: [ roles.role.all.bin ],
-			// 		type: 'json',
-            //     },
-            //     methods: {
-            //         get: [ (req, res) => {
-            //             USER_SESSION.destroySession(req.session);
-			// 			res.redirect('/login');
-            //         }]
-            //     },
-            // },
+            [CF_ROUTINGS_COMMON.LOGOUT]: {
+                config: {
+                    auth: [ roles.role.all.bin ],
+					type: 'json',
+                },
+                methods: {
+                    get: [ (req, res) => {
+                        USER_SESSION.destroySession(req.session);
+						res.redirect('/login');
+                    }]
+                },
+            },
 
             [CF_ROUTINGS_COMMON.LIST_PROVINCES]: {
                 config: {

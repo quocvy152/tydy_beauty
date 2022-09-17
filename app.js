@@ -26,7 +26,7 @@ let figlet = require('figlet');
 if (cluster.isMaster) {
     // require('./sync/wms/pull.queue');
 
-    figlet(`BOOKING-BE`, function(err, data) {
+    figlet(`TYDY-BEAUTY`, function(err, data) {
         if (err) {
             console.log('Something went wrong...');
             console.dir(err);
